@@ -1,0 +1,78 @@
+.smartsheetPicker {
+  .sheetPickerMenu{
+    width:100%;
+    padding-top: 0;
+  }
+  div.sheetPicker {
+    padding-top: 7px;
+    max-height: 280px;
+    overflow:auto;
+  }
+
+  div.sheetPicker > ul {
+    padding-left: 0em;
+  }
+
+  .sheetPicker {
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding-left: 1em;
+    }
+
+    li {
+      background-repeat: no-repeat;
+      background-position: 0 2px;
+      padding-left: 14px;
+      cursor: pointer;
+    }
+
+    li.closed li {
+      display: none;
+    }
+
+    li.closed {
+      background-image: url("../img/img_arrow_closed_grey.png");
+    }
+
+    li.open {
+      background-image: url("../img/img_arrow_open_grey.png");
+    }
+
+    .WORKSPACE, .FOLDER, .SHEET, .FAVORITES {
+      background-repeat: no-repeat;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      padding-left: 32px;
+    }
+
+    .WORKSPACE {
+      background-position: -7px -166px;
+      background-image: url("../img/img_sprite_home_22.png");
+    }
+
+    .FOLDER {
+      background-position: -7px -131px;
+      background-image: url("../img/img_sprite_home_22.png");
+    }
+
+    .SHEET {
+      background-position: -3px -770px;
+      background-image: url("../img/img_sprite_home_22.png");
+    }
+
+    .FAVORITES {
+      background-position: -7px -437px;
+      background-image: url("../img/img_sprite_home_22.png");
+    }
+
+    .selected {
+      font-weight: bold;
+    }
+
+    .match {
+      font-weight: bold;
+      background-color: yellow;
+    }
+  }
+}
