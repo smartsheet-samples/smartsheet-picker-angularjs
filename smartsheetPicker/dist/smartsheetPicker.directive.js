@@ -14,7 +14,11 @@
                 onLoadComplete : '&',
                 testVar: "="
             },
-            templateUrl: '../smartsheetPicker/dist/smartsheetPicker.html',
+            template: '<div uib-dropdown auto-close="outsideClick" uib-keyboard-nav="true" is-open="vm.pickerVisible">' +
+                        '<div uib-dropdown-menu class="sheetPickerMenu" style="width:100%">'+
+                        '<input type="text" ng-model="vm.searchText" placeholder="Search" class="form-control" id="searchSheets" />' +
+                        '<div class="sheetPicker" ng-click="vm.handleTreeClick($event)" id="sheetPicker">' +
+                        '<img src="../smartsheetPicker/img/ajax-loader.gif"></div></div></div>',
             controller: ['$scope', smartsheetPickerController],
             controllerAs: 'vm',
             bindToController: true
