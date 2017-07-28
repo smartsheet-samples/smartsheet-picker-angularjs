@@ -2,7 +2,7 @@
     'use strict';
 
     var myApp = angular.module('example', [
-        'sheetPicker',
+        'smartsheetPicker',
         'home'
     ]);
 })();

@@ -1,10 +1,10 @@
 (function() {
     'use strict';
     angular
-        .module('sheetPicker')
-        .directive('sheetPicker', [sheetPicker]);
+        .module('smartsheetPicker')
+        .directive('smartsheetPicker', [ smartsheetPicker ]);
 
-    function sheetPicker() {
+    function smartsheetPicker() {
         return {
             restrict: 'E',
             scope: {
@@ -14,23 +14,21 @@
                 onLoadComplete : '&',
                 testVar: "="
             },
-            // todo: fix this path. probably inject template and not templateUrl
-            templateUrl: 'sheetPicker/dist/sheetPicker.html',
-            controller: ['$scope', sheetPickerController],
+            templateUrl: 'smartsheetPicker/dist/smartsheetPicker.html',
+            controller: ['$scope', smartsheetPickerController],
             controllerAs: 'vm',
-            bindToController: true,
-            link: function (scope, element, attrs) {
-                // Dynamically position the sheet picker over drop down button
-                var sheetPicker = angular.element(element[0].getElementsByClassName('sheetPicker'));
-                var sheetPickerMenu = element[0].getElementsByClassName('sheetPickerMenu');
-                angular.element(sheetPickerMenu).css({
-                    marginTop: (sheetPicker.prop('offsetHeight')*-1)+'px',
-                });
-            }
+            bindToController: true//,
+            // link: function (scope, element, attrs) {
+            //     // Dynamically position the sheet picker over drop down button
+            //     var sheetPicker = angular.element(element[0].getElementsByClassName('sheetPicker'));
+            //     var sheetPickerMenu = element[0].getElementsByClassName('sheetPickerMenu');
+            //     angular.element(sheetPickerMenu).css({
+            //         marginTop: (sheetPicker.prop('offsetHeight')*-1)+'px',
+            //     });
+            // }
         };
 
-        function sheetPickerController($scope) {
-            console.log('sheetPickerController');
+        function smartsheetPickerController($scope) {
             var vm = this;
             console.log(vm.treeData);
             vm.pickerVisible = false;
