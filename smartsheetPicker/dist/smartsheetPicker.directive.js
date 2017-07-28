@@ -14,23 +14,14 @@
                 onLoadComplete : '&',
                 testVar: "="
             },
-            templateUrl: 'smartsheetPicker/dist/smartsheetPicker.html',
+            templateUrl: '../smartsheetPicker/dist/smartsheetPicker.html',
             controller: ['$scope', smartsheetPickerController],
             controllerAs: 'vm',
-            bindToController: true//,
-            // link: function (scope, element, attrs) {
-            //     // Dynamically position the sheet picker over drop down button
-            //     var sheetPicker = angular.element(element[0].getElementsByClassName('sheetPicker'));
-            //     var sheetPickerMenu = element[0].getElementsByClassName('sheetPickerMenu');
-            //     angular.element(sheetPickerMenu).css({
-            //         marginTop: (sheetPicker.prop('offsetHeight')*-1)+'px',
-            //     });
-            // }
+            bindToController: true
         };
 
         function smartsheetPickerController($scope) {
             var vm = this;
-            console.log(vm.treeData);
             vm.pickerVisible = false;
             vm.closePicker = closePicker;
             vm.CONTAINER = {
