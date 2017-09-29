@@ -41,6 +41,7 @@
             // fixme: Selected sheet. This will a sheet object from the raw json response we got from the server.
 
             // vm.treeData = null; // Raw json response from the server that contains all of the info about the tree
+            vm.formattedTree = []; 
             vm.treeElements = []; // When rendering, we keep a list of all of the elements as they are rendered so we can refer to them by an index. This can change every single time the tree is rendered.
             vm.selectedTreeElementIndex = null; // When we select an element in the tree, this is the index into the treeElements array. It is also used to create the id on the HTML element so we can select it later
 
@@ -63,6 +64,8 @@
                 if (vm.treeData != null) {
                     this.searchTimeout = setTimeout(function () {
                         this.searchTimeout = null;
+                        // i don't like this here
+                        this.formatTreeData();
                         this.renderTree();
                     }.bind(this), this.searchTimeoutDelay);
                 }
@@ -140,9 +143,84 @@
                     }
                 }
             };
+            vm.formatTreeData = function () {
+                vm.formattedTree = {
+                    "id": null,
+                    "name": null,  // fixme verify we need this
+                    "permalink": null,   // fixme verify we need this
+                    "type": null,   // fixme verify we need this
+                    "sheets": null,   // fixme verify we need this
+                    "folders": [
+                        {
+                            "id": null,
+                            "name": "Favorites",
+                            "permalink": null,
+                            "type": "FAVORITES",
+                            // todo get favorites
+                            "sheets": [],//vm.treeData.sheets.filter(function(sheet) { return sheet.favorite; }),
+                            "reports": [],//vm.treeData.reports.filter(function(report) { return report.favorite; }),
+                            "sights": [] //vm.treeData.sights.filter(function(sight) { return sight.favorite; })
+                        },
+                        {
+                            "id": null,
+                            "name": "Sheets",
+                            "permalink": null,
+                            "type": "FOLDER",
+                            "sheets": vm.treeData.folders.map(function(folder) { 
+                                folder.type = "FOLDER"; 
+                                return folder 
+                            })
+                        },
+                        {
+                            "id":null,
+                            "name": "Workspaces",
+                            "type": "WORKSPACE",
+                            "workspaces": vm.treeData.workspaces                            
+                        }
+                    ],
+                    
+                };
+                vm.formattedTree.folders[1].sheets = vm.formattedTree.folders[1].sheets.concat(vm.treeData.sheets)
+    
+                this.extractFavoriteSheetsFromList = function(sheets) {
+                    return sheets.filter(function (sheet) {
+                        return sheet.favorite;
+                    });
+                }
+    
+                this.extractFavoriteSheetsFromFolders = function(folders) {
+                    var favSheets = [];
+                    for (var i = 0; i < folders.length; i++) {
+                        var folder = folders[i];
+                        if (folder.sheets) {
+                            favSheets = favSheets.concat(this.extractFavoriteSheetsFromList(folder.sheets));
+                        }
+                        if (folder.folders) {
+                            favSheets = favSheets.concat(this.extractFavoriteSheetsFromFolders(folder.folders));
+                        }
+                    }
+                    return favSheets;
+                }
 
+                this.extractFavoriteSheets = function() {
+                    var favSheets = this.extractFavoriteSheetsFromList(vm.treeData.sheets);
+                    if (vm.treeData.folders) {
+                        favSheets = favSheets.concat(this.extractFavoriteSheetsFromFolders(vm.treeData.folders));
+                    }
+                    return favSheets;
+                }
+                this.extractFavorites = function() {
+                    // extract favorite sheets
+                    vm.formattedTree.folders[0].sheets = this.extractFavoriteSheets();
+                    // extract favorite reports
+                    // vm.formattedTree.folders[0].reports = this.extractFavoriteReports();
+                }
+                this.extractFavorites();
+            };
+            vm.formatTreeData.bind($scope);
+            
 
-            this.renderTree;
+            // this.renderTree;
             // todo: remove this and simply bind to the response that is already in memory
             // smartsheetService.getSmartsheetHome().then(function (homeResponse) {
             //     vm.treeData = homeResponse.data.data;
@@ -194,9 +272,9 @@
                     this.selectedTreeElementIndex = null;
 
                     var childrenBuf = new Buffer();
-                    this.renderNodes(vm.treeData.sheets, vm.CONTAINER.SHEET, childrenBuf, false);
-                    this.renderNodes(vm.treeData.folders, vm.CONTAINER.FOLDER, childrenBuf, false);
-                    this.renderNodes(vm.treeData.workspaces, vm.CONTAINER.WORKSPACE, childrenBuf, false);
+                    this.renderNodes(vm.formattedTree.sheets, vm.CONTAINER.SHEET, childrenBuf, false);
+                    this.renderNodes(vm.formattedTree.folders, vm.CONTAINER.FOLDER, childrenBuf, false);
+                    this.renderNodes(vm.formattedTree.workspaces, vm.CONTAINER.WORKSPACE, childrenBuf, false);
                     var childrenHtml = childrenBuf.getSquashedBuffer();
 
                     var buf = new Buffer();
