@@ -11,8 +11,10 @@
                 onSheetSelect: "&",
                 treeData: "=",
                 selectedSheet: "=",
-                onLoadComplete : '&',
-                testVar: "="
+                onLoadComplete : "&",
+                includeSheet: "@",
+                includeReport: "@",
+                includeSight: "@"
             },
             template: '<div uib-dropdown auto-close="outsideClick" uib-keyboard-nav="true" is-open="vm.pickerVisible">' +
                         '<div uib-dropdown-menu class="sheetPickerMenu" style="width:100%">'+
@@ -155,7 +157,7 @@
                             "id": null,
                             "name": "Favorites",
                             "permalink": null,
-                            "type": "FAVORITES",
+                            "type": vm.CONTAINER.FAVORITES,
                             // todo get favorites
                             "sheets": [],//vm.treeData.sheets.filter(function(sheet) { return sheet.favorite; }),
                             "reports": [],//vm.treeData.reports.filter(function(report) { return report.favorite; }),
@@ -165,17 +167,23 @@
                             "id": null,
                             "name": "Sheets",
                             "permalink": null,
-                            "type": "FOLDER",
+                            "type": vm.CONTAINER.FOLDER,
                             "sheets": vm.treeData.folders.map(function(folder) { 
-                                folder.type = "FOLDER"; 
+                                folder.type = vm.CONTAINER.FOLDER; 
                                 return folder 
                             })
                         },
                         {
                             "id":null,
                             "name": "Workspaces",
-                            "type": "WORKSPACE",
+                            "type": vm.CONTAINER.WORKSPACE,
                             "workspaces": vm.treeData.workspaces                            
+                        },
+                        {
+                            "id": null,
+                            "name": "Reports",
+                            "type": vm.CONTAINER.REPORT,
+                            "reports": vm.treeData.reports
                         }
                     ],
                     
@@ -187,7 +195,6 @@
                         return sheet.favorite;
                     });
                 }
-    
                 this.extractFavoriteSheetsFromFolders = function(folders) {
                     var favSheets = [];
                     for (var i = 0; i < folders.length; i++) {
@@ -201,7 +208,6 @@
                     }
                     return favSheets;
                 }
-
                 this.extractFavoriteSheets = function() {
                     var favSheets = this.extractFavoriteSheetsFromList(vm.treeData.sheets);
                     if (vm.treeData.folders) {
@@ -209,36 +215,46 @@
                     }
                     return favSheets;
                 }
+    
+                this.extractFavoriteReportsFromList = function(reports) {
+                    return reports.filter(function (reports) {
+                        return report.favorite;
+                    });
+                }
+                this.extractFavoriteReportsFromFolders = function(folders) {
+                    var favReports = [];
+                    for (var i = 0; i < folders.length; i++) {
+                        var folder = folders[i];
+                        if (folder.reports) {
+                            favReports = favReports.concat(this.extractFavoriteReportsFromList(folder.reports));
+                        }
+                        if (folder.folders) {
+                            favReports = favReports.concat(this.extractFavoriteReportsFromFolders(folder.folders));
+                        }
+                    }
+                    return favReports;
+                }
+                this.extractFavoriteReports = function() {
+                    var favReports = this.extractFavoriteReportsFromList(vm.treeData.reports);
+                    if (vm.treeData.folders) {
+                        favReports = favReports.concat(this.extractFavoriteReportsFromFolders(vm.treeData.folders));
+                    }
+                    return favReports;
+                }
+                                
                 this.extractFavorites = function() {
-                    // extract favorite sheets
-                    vm.formattedTree.folders[0].sheets = this.extractFavoriteSheets();
-                    // extract favorite reports
-                    // vm.formattedTree.folders[0].reports = this.extractFavoriteReports();
+                    if (vm.includeSheets === 'true') { 
+                        // extract favorite sheets
+                        vm.formattedTree.folders[0].sheets = this.extractFavoriteSheets();
+                    }
+                    if (vm.includeReports === 'true') {
+                        // extract favorite reports
+                        vm.formattedTree.folders[0].reports = this.extractFavoriteReports();
+                    }
                 }
                 this.extractFavorites();
             };
             vm.formatTreeData.bind($scope);
-            
-
-            // this.renderTree;
-            // todo: remove this and simply bind to the response that is already in memory
-            // smartsheetService.getSmartsheetHome().then(function (homeResponse) {
-            //     vm.treeData = homeResponse.data.data;
-            //     this.lastRenderedSearchTerm = null;
-            //     var start = new Date();
-            //     this.renderTree();
-            //     var elapsedRenderTime = new Date() - start;
-
-            //     // Use the elapsed render time to tune how fast we can refresh the tree when the user is typing in the search box
-            //     // For tiny trees, we can re-render it almost instantaneously. For very large trees (many thousands of elements), we should only render when they pause typing.
-            //     if (elapsedRenderTime > 500) {
-            //         this.searchTimeoutDelay = 500; // max delay
-            //     } else {
-            //         this.searchTimeoutDelay = elapsedRenderTime;
-            //     }
-            // }.bind(this));
-
-
             /**
              * Renders the tree using UL and LI elements.
              * This is done in a non-angular way for performance reasons when rendering extremely large trees.
@@ -272,9 +288,18 @@
                     this.selectedTreeElementIndex = null;
 
                     var childrenBuf = new Buffer();
-                    this.renderNodes(vm.formattedTree.sheets, vm.CONTAINER.SHEET, childrenBuf, false);
                     this.renderNodes(vm.formattedTree.folders, vm.CONTAINER.FOLDER, childrenBuf, false);
                     this.renderNodes(vm.formattedTree.workspaces, vm.CONTAINER.WORKSPACE, childrenBuf, false);
+                    if (vm.includeSheets === 'true') {
+                        this.renderNodes(vm.formattedTree.sheets, vm.CONTAINER.SHEET, childrenBuf, false);
+                    }
+                    if (vm.includeSights === 'true') {
+                        this.renderNodes(vm.formattedTree.sights, vm.CONTAINER.SHEET, childrenBuf, false);
+                    }
+                    if (vm.includeReports === 'true') {
+                        this.renderNodes(vm.formattedTree.sheets, vm.CONTAINER.SHEET, childrenBuf, false);
+                    }
+
                     var childrenHtml = childrenBuf.getSquashedBuffer();
 
                     var buf = new Buffer();

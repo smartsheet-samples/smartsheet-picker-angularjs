@@ -5,7 +5,7 @@
     <script src="../smartsheetPicker/dist/angular/angular.min.js"></script>
     <script src="../smartsheetPicker/dist/smartsheetPicker.module.js"></script>
     <script src="example.module.js"></script>
-    <script src="../smartsheet-home.js"></script>
+    <script src="../smartsheet-home.js"></script> <!-- stubbing a response for GET /home from Smartsheet -->
     <script src="../smartsheetPicker/dist/smartsheetPicker.directive.js"></script>
     <link href="../smartsheetPicker/dist/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="../smartsheetPicker/dist/smartsheetPicker.css" rel="stylesheet"></script>
@@ -17,7 +17,10 @@
         <smartsheet-picker
             on-sheet-select="vm.setSelectedSheet(selectedSheet)"
             tree-data="vm.treeData"
-            selected-sheet= "vm.selectedSheet"></sheet-picker>
+            selected-sheet= "vm.selectedSheet"
+            include-sheets="true"
+            include-reports="true"
+            include-sights="true"></sheet-picker>
     </div>
     <script>
         angular

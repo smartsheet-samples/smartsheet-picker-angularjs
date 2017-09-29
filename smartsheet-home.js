@@ -1315,6 +1315,14 @@ var realSmartsheetHome = {
                             "createdAt": "2017-09-28T21:52:56Z",
                             "modifiedAt": "2017-09-28T21:52:56Z"
                         }
+                    ],
+                    "reports": [
+                        {
+                            "id": 2499388741314436,
+                            "name": "Homers Report",
+                            "accessLevel": "OWNER",
+                            "permalink": "https://app.smartsheet.com/b/home?lx=5C0NVp6jzp8wQf5IY1uHQg"
+                        }
                     ]
                 }
             ]
