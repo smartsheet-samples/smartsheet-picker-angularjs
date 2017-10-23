@@ -22,7 +22,7 @@
   background-image: url("../img/img_arrow_closed_grey.png"); }
 .smartsheetPicker .sheetPicker li.open {
   background-image: url("../img/img_arrow_open_grey.png"); }
-.smartsheetPicker .sheetPicker .WORKSPACE, .smartsheetPicker .sheetPicker .FOLDER, .smartsheetPicker .sheetPicker .SHEET, .smartsheetPicker .sheetPicker .FAVORITES {
+.smartsheetPicker .sheetPicker .WORKSPACE, .smartsheetPicker .sheetPicker .FOLDER, .smartsheetPicker .sheetPicker .SHEET, .smartsheetPicker .sheetPicker .FAVORITES, .smartsheetPicker .sheetPicker .REPORT, .smartsheetPicker .sheetPicker .REPORTS {
   background-repeat: no-repeat;
   padding-top: 5px;
   padding-bottom: 5px;
@@ -39,10 +39,16 @@
 .smartsheetPicker .sheetPicker .FAVORITES {
   background-position: -7px -437px;
   background-image: url("../img/img_sprite_home_22.png"); }
+.smartsheetPicker .sheetPicker .REPORT, .smartsheetPicker .sheetPicker .REPORTS {
+  background-position: -3px -795px;
+  background-image: url("../img/img_sprite_home_22.png"); }
+.smartsheetPicker .sheetPicker .SIGHT, .smartsheetPicker .sheetPicker .SIGHTS {
+  background-position: -3px -849px;
+  background-image: url("../img/img_sprite_home_22.png"); }
 .smartsheetPicker .sheetPicker .selected {
   font-weight: bold; }
 .smartsheetPicker .sheetPicker .match {
   font-weight: bold;
   background-color: yellow; }
 
-/*# sourceMappingURL=sheetPicker.css.map */
+/*# sourceMappingURL=smartsheetPicker.css.map */

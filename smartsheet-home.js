@@ -1362,6 +1362,7 @@ var realSmartsheetHome = {
             "id": 4259596664629124,
             "name": "Big Report",
             "accessLevel": "OWNER",
+            "favorite": true,
             "permalink": "https://app.smartsheet.com/b/home?lx=Lw7Rno6eqJ8CfXOjDTnhNQ"
         }
     ],

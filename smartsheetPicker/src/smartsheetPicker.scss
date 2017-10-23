@@ -39,7 +39,7 @@
       background-image: url("../img/img_arrow_open_grey.png");
     }
 
-    .WORKSPACE, .FOLDER, .SHEET, .FAVORITES {
+    .WORKSPACE, .FOLDER, .SHEET, .FAVORITES, .REPORT, .REPORTS {
       background-repeat: no-repeat;
       padding-top: 5px;
       padding-bottom: 5px;
@@ -63,6 +63,16 @@
 
     .FAVORITES {
       background-position: -7px -437px;
+      background-image: url("../img/img_sprite_home_22.png");
+    }
+
+    .REPORT, .REPORTS {
+      background-position: -3px -795px;
+      background-image: url("../img/img_sprite_home_22.png");
+    }
+    
+    .SIGHT, .SIGHTS {
+      background-position: -3px -849px;
       background-image: url("../img/img_sprite_home_22.png");
     }
 

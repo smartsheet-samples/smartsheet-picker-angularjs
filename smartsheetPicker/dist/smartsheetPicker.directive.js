@@ -12,9 +12,9 @@
                 treeData: "=",
                 selectedSheet: "=",
                 onLoadComplete : "&",
-                includeSheet: "@",
-                includeReport: "@",
-                includeSight: "@"
+                includeSheets: "@",
+                includeReports: "@",
+                includeSights: "@"
             },
             template: '<div uib-dropdown auto-close="outsideClick" uib-keyboard-nav="true" is-open="vm.pickerVisible">' +
                         '<div uib-dropdown-menu class="sheetPickerMenu" style="width:100%">'+
@@ -35,6 +35,7 @@
                 WORKSPACE: 'WORKSPACE',
                 SHEET: 'SHEET',
                 REPORT: 'REPORT',
+                REPORTS: 'REPORTS',
                 FAVORITES: 'FAVORITES'
             };
             vm.selectedSheet = {
@@ -159,37 +160,48 @@
                             "permalink": null,
                             "type": vm.CONTAINER.FAVORITES,
                             // todo get favorites
-                            "sheets": [],//vm.treeData.sheets.filter(function(sheet) { return sheet.favorite; }),
-                            "reports": [],//vm.treeData.reports.filter(function(report) { return report.favorite; }),
-                            "sights": [] //vm.treeData.sights.filter(function(sight) { return sight.favorite; })
-                        },
-                        {
-                            "id": null,
-                            "name": "Sheets",
-                            "permalink": null,
-                            "type": vm.CONTAINER.FOLDER,
-                            "sheets": vm.treeData.folders.map(function(folder) { 
-                                folder.type = vm.CONTAINER.FOLDER; 
-                                return folder 
-                            })
-                        },
-                        {
-                            "id":null,
-                            "name": "Workspaces",
-                            "type": vm.CONTAINER.WORKSPACE,
-                            "workspaces": vm.treeData.workspaces                            
-                        },
-                        {
-                            "id": null,
-                            "name": "Reports",
-                            "type": vm.CONTAINER.REPORT,
-                            "reports": vm.treeData.reports
+                            "sheets": [],
+                            "reports": [],
+                            "sights": [] 
                         }
-                    ],
-                    
+                    ]
                 };
-                vm.formattedTree.folders[1].sheets = vm.formattedTree.folders[1].sheets.concat(vm.treeData.sheets)
-    
+                if (vm.includeSheets === 'true') {
+                    var sheetFolder = {
+                        "id": null,
+                        "name": "Sheets",
+                        "permalink": null,
+                        "type": vm.CONTAINER.FOLDER,
+                        "sheets": vm.treeData.folders.map(function(folder) { 
+                            folder.type = vm.CONTAINER.FOLDER; 
+                            return folder 
+                        })
+                    };
+                    sheetFolder.sheets = sheetFolder.sheets.concat(vm.treeData.sheets);
+                    vm.formattedTree.folders.push(sheetFolder);
+                }
+                // keeping objects in the order that is expected. workspaces would come after sheets
+                var workspaceFolder = {
+                    "id":null,
+                    "name": "Workspaces",
+                    "type": vm.CONTAINER.WORKSPACE,
+                    "workspaces": vm.treeData.workspaces 
+                };
+                vm.formattedTree.folders.push(workspaceFolder);
+
+                console.log(vm.includeReports === "true");                
+                if (vm.includeReports === 'true') {
+                    var reportsFolder = {
+                        "id": null,
+                        "name": "Reports",
+                        "type": vm.CONTAINER.REPORTS,
+                        "reports": vm.treeData.reports
+                    };
+                    vm.formattedTree.folders.push(reportsFolder);
+                }
+
+                // todo: sights goes here
+
                 this.extractFavoriteSheetsFromList = function(sheets) {
                     return sheets.filter(function (sheet) {
                         return sheet.favorite;
@@ -217,7 +229,7 @@
                 }
     
                 this.extractFavoriteReportsFromList = function(reports) {
-                    return reports.filter(function (reports) {
+                    return reports.filter(function (report) {
                         return report.favorite;
                     });
                 }
@@ -290,15 +302,6 @@
                     var childrenBuf = new Buffer();
                     this.renderNodes(vm.formattedTree.folders, vm.CONTAINER.FOLDER, childrenBuf, false);
                     this.renderNodes(vm.formattedTree.workspaces, vm.CONTAINER.WORKSPACE, childrenBuf, false);
-                    if (vm.includeSheets === 'true') {
-                        this.renderNodes(vm.formattedTree.sheets, vm.CONTAINER.SHEET, childrenBuf, false);
-                    }
-                    if (vm.includeSights === 'true') {
-                        this.renderNodes(vm.formattedTree.sights, vm.CONTAINER.SHEET, childrenBuf, false);
-                    }
-                    if (vm.includeReports === 'true') {
-                        this.renderNodes(vm.formattedTree.sheets, vm.CONTAINER.SHEET, childrenBuf, false);
-                    }
 
                     var childrenHtml = childrenBuf.getSquashedBuffer();
 
@@ -325,9 +328,12 @@
             };
 
             function elementIsContainer(treeElement) {
-                // todo: what if we just check if treeElement.workpaces || treeElement.folders, etc. exist?
-                return treeElement !== undefined && treeElement.type && (treeElement.type === 'WORKSPACE' || treeElement.type === 'FOLDER'
-                    || treeElement.type === 'FAVORITES' || treeElement.type === 'SIGHTS' || treeElement.type === 'REPORTS');
+                return treeElement !== undefined && treeElement.type && 
+                    (treeElement.type === vm.CONTAINER.WORKSPACE || 
+                    treeElement.type === vm.CONTAINER.FOLDER || 
+                    treeElement.type === vm.CONTAINER.FAVORITES || 
+                    treeElement.type === vm.CONTAINER.SIGHTS || 
+                    treeElement.type === vm.CONTAINER.REPORTS);
             }
 
             function setElementType(element, container) {
@@ -359,8 +365,17 @@
                             // also be rendered since it contains children that match.
                             var childrenBuffer = new Buffer();
                             this.renderNodes(element.folders, vm.CONTAINER.FOLDER, childrenBuffer, currentElementIsMatch);
-                            this.renderNodes(element.sheets, vm.CONTAINER.SHEET, childrenBuffer, currentElementIsMatch);
                             this.renderNodes(element.workspaces, vm.CONTAINER.WORKSPACE, childrenBuffer, currentElementIsMatch);
+                            
+                            if (vm.includeSheets === 'true') {
+                                this.renderNodes(element.sheets, vm.CONTAINER.SHEET, childrenBuffer, false);
+                            }
+                            if (vm.includeSights === 'true') {
+                                this.renderNodes(element.sights, vm.CONTAINER.SIGHTS, childrenBuffer, false);
+                            }
+                            if (vm.includeReports === 'true') {
+                                this.renderNodes(element.reports, vm.CONTAINER.REPORT, childrenBuffer, false);
+                            }
                             childrenHtml = childrenBuffer.getSquashedBuffer();
                         }
 
@@ -395,13 +410,17 @@
                             } else {
                                 buf.append(name);
                             }
-
-                            // Add the count of sheets under this container
-                            if ((element.type === 'FOLDER' || element.type === 'WORKSPACE') && element.sheets != null && element.sheets.length > 0) {
-                                buf.append(' (');
-                                buf.append(element.sheets.length);
-                                buf.append(')');
+                            
+                            function elementIsContainer(treeElement) {
+                                return (element.type === 'FOLDER' || element.type === 'WORKSPACE' || element.type === 'REPORTS') && ((element.sheets != null && element.sheets.length > 0) || (element.reports != null && element.reports.length > 0));
+                                    
                             }
+                            // Add the count of sheets under this container
+                            // if (elementIsContainer(element)) {
+                            //     buf.append(' (');
+                            //     buf.append(element.sheets.length);
+                            //     buf.append(')');
+                            // }
 
                             buf.append('</span>');
 

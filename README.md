@@ -9,5 +9,10 @@ AngularJS directive for a Smartsheet Picker
 **npm package**
 
 ## Usage
+
+#### SASS
+    
+    sass --watch smartsheetPicker.scss:../dist/smartsheetPicker.css
+
 #### TreeData
 Whereever you use the Smartsheet Picker directive, you'll need to load the `treeData` object with the response from the `GET /home` endpoint in the Smartsheet API. 
