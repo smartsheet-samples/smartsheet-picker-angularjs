@@ -151,10 +151,6 @@
             vm.formatTreeData = function () {
                 vm.formattedTree = {
                     "id": null,
-                    "name": null,  // fixme verify we need this
-                    "permalink": null,   // fixme verify we need this
-                    "type": null,   // fixme verify we need this
-                    "sheets": null,   // fixme verify we need this
                     "folders": [
                         {
                             "id": null,
