@@ -27,3 +27,6 @@ The directive provides several options for customization. Here's an explanation 
 * **include-sheets:** boolean value of whether sheets will be included in the picker 
 * **include-reports:** boolean value of whether reports will be included in the picker 
 * **include-sights:** boolean value of whether sights will be included in the picker 
+
+## Compatibility
+This was built and tested with AngularJS v. 1.6.1
