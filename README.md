@@ -1,18 +1,29 @@
 # Smartsheet Picker AngularJS
-AngularJS directive for a Smartsheet Picker
+This project is a self-contained AngularJS directive that provides an expandable tree-view of a user's Smartsheet home. 
 
-[ image of sheet-picker goes here ]
+![Smartsheet Picker Folder Tree](https://user-images.githubusercontent.com/4098/32123928-eca5352e-bb1a-11e7-8df8-56e2f527a16f.png)
+
+The directive consumes the response from a [`GET /home`](https://smartsheet-platform.github.io/api-docs/#home) call from the [Smartsheet API](https://smartsheet-platform.github.io/api-docs/) and organizes it into a tree structure that is also searchable.
+
+![Smartsheet Picker Search Box](https://user-images.githubusercontent.com/4098/32123924-e8762c7e-bb1a-11e7-8093-8d92e3ae9d8b.png)
 
 ## Install
-**manual**
+To install drop the `smartsheetPicker` directory into your project and be sure to include the following files in your html:
 
-**npm package**
+smartsheetPicker/
+* dist/smartsheetPicker.module.js
+* dist/smartsheetPicker.directive.js
+* dist/smartsheetPicker.css
+
+**todo: probably want minified versions**
+
+**todo: npm package?**
 
 ## Usage
-
-#### SASS
-    
-    sass --watch smartsheetPicker.scss:../dist/smartsheetPicker.css
-
-#### TreeData
-Whereever you use the Smartsheet Picker directive, you'll need to load the `treeData` object with the response from the `GET /home` endpoint in the Smartsheet API. 
+The directive provides several options for customization. Here's an explanation of each of the available parameters:
+* **on-sheet-select:** this is the callback function that will be called when an item in the picker is selected
+* **tree-data:** the json response from calling `GET /home` from the Smartsheet API
+* **selected-sheet:** value of the selected sheet
+* **include-sheets:** boolean value of whether sheets will be included in the picker 
+* **include-reports:** boolean value of whether reports will be included in the picker 
+* **include-sights:** boolean value of whether sights will be included in the picker 
