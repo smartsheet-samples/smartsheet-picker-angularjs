@@ -39,7 +39,7 @@
       background-image: url("../img/img_arrow_open_grey.png");
     }
 
-    .WORKSPACE, .FOLDER, .SHEET, .FAVORITES, .REPORT, .REPORTS {
+    .WORKSPACE, .FOLDER, .SHEET, .FAVORITES, .REPORT, .REPORTS, .SIGHT, .SIGHTS {
       background-repeat: no-repeat;
       padding-top: 5px;
       padding-bottom: 5px;
@@ -47,12 +47,12 @@
     }
 
     .WORKSPACE {
-      background-position: -7px -166px;
+      background-position: -3px -717px;
       background-image: url("../img/img_sprite_home_22.png");
     }
 
     .FOLDER {
-      background-position: -7px -131px;
+      background-position: -3px -692px;
       background-image: url("../img/img_sprite_home_22.png");
     }
 
@@ -62,7 +62,7 @@
     }
 
     .FAVORITES {
-      background-position: -7px -437px;
+      background-position: -3px -900px;
       background-image: url("../img/img_sprite_home_22.png");
     }
 
@@ -72,7 +72,7 @@
     }
     
     .SIGHT, .SIGHTS {
-      background-position: -3px -849px;
+      background-position: -3px -821px;
       background-image: url("../img/img_sprite_home_22.png");
     }
 

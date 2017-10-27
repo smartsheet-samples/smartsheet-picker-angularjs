@@ -1507,6 +1507,17 @@ var realSmartsheetHome = {
                                     "accessLevel": "VIEWER",
                                     "permalink": "https://app.smartsheet.com/b/home?lx=v9HPZ_qGfsfiioge_I8gJw"
                                 }
+                            ],
+                            "sights": [
+                                {
+                                    "id": 5162968175404932,
+                                    "name": "Sighty Sight Sight Sight",
+                                    "accessLevel": "ADMIN",
+                                    "favorite": true,
+                                    "permalink": "https://app.smartsheet.com/b/home?lx=U7EOF8hGvIunL3pRIpaJmSnUXphoZCJbZcV5Sw9DPzI",
+                                    "createdAt": "2016-10-03T22:51:37Z",
+                                    "modifiedAt": "2016-11-10T20:46:50Z"
+                                }
                             ]
                         }
                     ]
@@ -1958,13 +1969,140 @@ var realSmartsheetHome = {
             "id": 836803344263044,
             "name": "Sharing Workspace",
             "accessLevel": "OWNER",
-            "permalink": "https://app.smartsheet.com/b/home?lx=69qgtsXVSi1FfZP46eaLQw"
-        },
-        {
-            "id": 8097978134095748,
-            "name": "Sharing Workspace",
-            "accessLevel": "ADMIN",
-            "permalink": "https://app.smartsheet.com/b/home?lx=K_9_aM3xctoBrsgd36XmGg"
+            "permalink": "https://app.smartsheet.com/b/home?lx=69qgtsXVSi1FfZP46eaLQw",
+            "sheets": [
+                {
+                    "id": 5547447977043844,
+                    "name": "About",
+                    "accessLevel": "ADMIN",
+                    "permalink": "https://app.smartsheet.com/b/home?lx=MBqPY8l_eQfK7A5WIa87Ow",
+                    "createdAt": "2016-09-30T21:42:11Z",
+                    "modifiedAt": "2017-09-28T22:03:55Z"
+                },
+                {
+                    "id": 7613865593726852,
+                    "name": "DevRel Admin",
+                    "accessLevel": "ADMIN",
+                    "permalink": "https://app.smartsheet.com/b/home?lx=pTT2lbBjqpHZ-JqhPHTH3A",
+                    "createdAt": "2017-01-27T01:04:37Z",
+                    "modifiedAt": "2017-08-24T00:24:42Z"
+                },
+                {
+                    "id": 8304325073102724,
+                    "name": "DevRel Allies",
+                    "accessLevel": "OWNER",
+                    "permalink": "https://app.smartsheet.com/b/home?lx=0OynrTS9w3I1m3g7cW1HBA",
+                    "createdAt": "2017-05-25T20:58:30Z",
+                    "modifiedAt": "2017-08-28T18:25:10Z"
+                },
+                {
+                    "id": 2451047139567492,
+                    "name": "DevRel Backlog",
+                    "accessLevel": "ADMIN",
+                    "permalink": "https://app.smartsheet.com/b/home?lx=OWWwopejoTq6i5ethD4wYg",
+                    "createdAt": "2016-10-24T19:24:20Z",
+                    "modifiedAt": "2017-09-12T19:24:57Z"
+                },
+                {
+                    "id": 5388053821843332,
+                    "name": "DevRel Blog Posts",
+                    "accessLevel": "OWNER",
+                    "permalink": "https://app.smartsheet.com/b/home?lx=wPVD49smIir5kC9SKJD1lQ",
+                    "createdAt": "2017-08-19T23:30:01Z",
+                    "modifiedAt": "2017-10-09T18:06:35Z"
+                },
+                {
+                    "id": 6039397960312708,
+                    "name": "DevRel Event Assignments",
+                    "accessLevel": "OWNER",
+                    "permalink": "https://app.smartsheet.com/b/home?lx=d-klRZ8VuXuLJ0xmBNjY2w",
+                    "createdAt": "2017-08-08T21:13:22Z",
+                    "modifiedAt": "2017-10-20T21:43:19Z"
+                },
+                {
+                    "id": 512852818716548,
+                    "name": "DevRel Partners",
+                    "accessLevel": "OWNER",
+                    "permalink": "https://app.smartsheet.com/b/home?lx=Li5lAvVuyviBGHiHr_4tYA",
+                    "createdAt": "2017-06-13T21:28:50Z",
+                    "modifiedAt": "2017-09-28T22:03:55Z"
+                },
+                {
+                    "id": 7708766251575172,
+                    "name": "DevRel SDK Samples",
+                    "accessLevel": "ADMIN",
+                    "permalink": "https://app.smartsheet.com/b/home?lx=DCd6f3U4kH9H-i9a5D-Aqg",
+                    "createdAt": "2016-11-04T22:09:49Z",
+                    "modifiedAt": "2017-10-04T17:56:13Z"
+                },
+                {
+                    "id": 971299775375236,
+                    "name": "DevRel Sheet-Tweetr",
+                    "accessLevel": "OWNER",
+                    "permalink": "https://app.smartsheet.com/b/home?lx=pThUbEuNjGuGMFX9Cvuojw",
+                    "createdAt": "2017-06-02T00:34:05Z",
+                    "modifiedAt": "2017-10-22T18:46:14Z"
+                },
+                {
+                    "id": 2870487069026180,
+                    "name": "DevRel Team Tasks Backlog",
+                    "accessLevel": "OWNER",
+                    "permalink": "https://app.smartsheet.com/b/home?lx=o_A1otGK0CAPHHgRDcTJaw",
+                    "createdAt": "2017-05-22T22:34:11Z",
+                    "modifiedAt": "2017-10-19T21:15:47Z"
+                },
+                {
+                    "id": 616783242651524,
+                    "name": "DevRel Third-party Apps",
+                    "accessLevel": "ADMIN",
+                    "permalink": "https://app.smartsheet.com/b/home?lx=jwftq5_PDPmlWHBQlj47tg",
+                    "createdAt": "2017-08-23T22:20:38Z",
+                    "modifiedAt": "2017-08-28T18:11:19Z"
+                }
+            ],
+            "folders": [
+                {
+                    "id": 6503484276139908,
+                    "name": "Events",
+                    "permalink": "https://app.smartsheet.com/b/home?lx=1egtYxSBMfE1KQ1JqjzcM12F3tjZfBYMXSEruozjq1E",
+                    "sheets": [
+                        {
+                            "id": 7167585339893636,
+                            "name": "DevNexus2017",
+                            "accessLevel": "ADMIN",
+                            "permalink": "https://app.smartsheet.com/b/home?lx=IWqFBOIqGXvtQ023JjZC7g",
+                            "createdAt": "2016-11-23T23:47:52Z",
+                            "modifiedAt": "2017-08-21T00:32:16Z"
+                        },
+                        {
+                            "id": 3724922091530116,
+                            "name": "DevRel Conference Sheet",
+                            "accessLevel": "ADMIN",
+                            "permalink": "https://app.smartsheet.com/b/home?lx=6ka68budNsjKSHkvIvlmAA",
+                            "createdAt": "2016-11-17T00:32:47Z",
+                            "modifiedAt": "2017-10-17T18:34:00Z"
+                        },
+                        {
+                            "id": 8910731505624964,
+                            "name": "DotNet Fringe 2017",
+                            "accessLevel": "ADMIN",
+                            "permalink": "https://app.smartsheet.com/b/home?lx=32LGnim6s-qBWcJqwElKsQ",
+                            "createdAt": "2017-05-26T21:04:33Z",
+                            "modifiedAt": "2017-09-28T22:03:55Z"
+                        }
+                    ]
+                }
+            ],
+            "sights": [
+                {
+                    "id": 5162968175404932,
+                    "name": "DevRel Home",
+                    "accessLevel": "ADMIN",
+                    "permalink": "https://app.smartsheet.com/b/home?lx=U7EOF8hGvIunL3pRIpaJmSnUXphoZCJbZcV5Sw9DPzI",
+                    "createdAt": "2016-10-03T22:51:37Z",
+                    "modifiedAt": "2016-11-10T20:46:50Z"
+                }
+            ]
         }
     ]
 };

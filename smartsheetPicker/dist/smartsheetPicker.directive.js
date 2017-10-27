@@ -36,7 +36,9 @@
                 SHEET: 'SHEET',
                 REPORT: 'REPORT',
                 REPORTS: 'REPORTS',
-                FAVORITES: 'FAVORITES'
+                FAVORITES: 'FAVORITES',
+                SIGHTS: 'SIGHTS',
+                SIGHT: 'SIGHT'
             };
             vm.selectedSheet = {
                 sheet: null
@@ -159,7 +161,6 @@
                             "name": "Favorites",
                             "permalink": null,
                             "type": vm.CONTAINER.FAVORITES,
-                            // todo get favorites
                             "sheets": [],
                             "reports": [],
                             "sights": [] 
@@ -189,7 +190,6 @@
                 };
                 vm.formattedTree.folders.push(workspaceFolder);
 
-                console.log(vm.includeReports === "true");                
                 if (vm.includeReports === 'true') {
                     var reportsFolder = {
                         "id": null,
@@ -199,9 +199,57 @@
                     };
                     vm.formattedTree.folders.push(reportsFolder);
                 }
-
-                // todo: sights goes here
-
+                if (vm.includeSights === 'true') {
+                    this.sightsFolder = {
+                        "id": null,
+                        "name": "Sights",
+                        "type": vm.CONTAINER.SIGHTS,
+                        "sights": []
+                    };
+                    
+                    this.extractSightsFromList = function(sights) {
+                        sights = sights.map(sight => {
+                            sight.type = vm.CONTAINER.SIGHT;
+                            return sight;
+                        });
+                        this.sightsFolder.sights = this.sightsFolder.sights.concat(sights);
+                    }
+                    this.extractSightsFromFolders = function(folders) {
+                        for (var i = 0; i < folders.length; i++) {
+                            var folder = folders[i];
+                            if (folder.sights) {
+                                this.sightsFolder.sights = this.sightsFolder.sights.concat(folder.sights);
+                            }
+                            if (folder.folders) {
+                                this.extractSightsFromFolders(folder.folders);
+                            }
+                        }
+                    }
+                    this.extractSights = function() {
+                        if (vm.treeData.sights) {
+                            this.extractSightsFromList(vm.treeData.sights);
+                        }
+                        if (vm.treeData.folders) {
+                            this.extractSightsFromFolders(vm.treeData.folders)
+                        }
+                        if (vm.treeData.workspaces) {
+                            for (var i = 0; i < vm.treeData.workspaces.length; i++) {
+                                var workspace = vm.treeData.workspaces[i];
+                                if (workspace.sights) {
+                                    this.extractSightsFromList(workspace.sights);
+                                }
+                                if (workspace.folders) {
+                                    this.extractSightsFromFolders(workspace.folders);
+                                }
+                            }
+                        }
+                    }    
+                    this.extractSights();
+                    vm.formattedTree.folders.push(this.sightsFolder);
+                }
+                /*
+                 *  FAVORITES
+                 */
                 this.extractFavoriteSheetsFromList = function(sheets) {
                     return sheets.filter(function (sheet) {
                         return sheet.favorite;
@@ -253,15 +301,49 @@
                     }
                     return favReports;
                 }
+    
+                this.extractFavoriteSightsFromList = function(sights) {
+                    return sights.filter(function (sight) {
+                        return sight.favorite;
+                    }); 
+                }
+                this.extractFavoriteSightsFromFolders = function(folders) {
+                    var favSights = [];
+                    for (var i = 0; i < folders.length; i++) {
+                        var folder = folders[i];
+                        if (folder.sights) {
+                            favSights = favSights.concat(this.extractFavoriteSightsFromList(folder.sights));
+                        }
+                        if (folder.folders) {
+                            favSights = favSights.concat(this.extractFavoriteSightsFromFolders(folder.folders));
+                        }
+                    }
+                    return favSights;
+                }
+                this.extractFavoriteSights = function() {
+                    var favSights = [];
+
+                    if (vm.treeData.folders) {
+                        favSights = favSights.concat(this.extractFavoriteSightsFromFolders(vm.formattedTree.folders));
+                    }
+                    return favSights;
+                }
                                 
                 this.extractFavorites = function() {
                     if (vm.includeSheets === 'true') { 
                         // extract favorite sheets
-                        vm.formattedTree.folders[0].sheets = this.extractFavoriteSheets();
+                        vm.formattedTree.folders.filter(folder => folder.id === null && folder.type === vm.CONTAINER.FAVORITES)
+                                                .map(favFolder => favFolder.sheets = this.extractFavoriteSheets());
                     }
                     if (vm.includeReports === 'true') {
                         // extract favorite reports
-                        vm.formattedTree.folders[0].reports = this.extractFavoriteReports();
+                        vm.formattedTree.folders.filter(folder => folder.id === null && folder.type === vm.CONTAINER.FAVORITES)
+                                                .map(favFolder => favFolder.reports = this.extractFavoriteReports());
+                    }
+                    if (vm.includeSights === 'true') {
+                        // extract favorite sights
+                        vm.formattedTree.folders.filter(folder => folder.id === null && folder.type === vm.CONTAINER.FAVORITES)
+                                                .map(favFolder => favFolder.sights = this.extractFavoriteSights());
                     }
                 }
                 this.extractFavorites();
@@ -371,7 +453,7 @@
                                 this.renderNodes(element.sheets, vm.CONTAINER.SHEET, childrenBuffer, false);
                             }
                             if (vm.includeSights === 'true') {
-                                this.renderNodes(element.sights, vm.CONTAINER.SIGHTS, childrenBuffer, false);
+                                this.renderNodes(element.sights, vm.CONTAINER.SIGHT, childrenBuffer, false);
                             }
                             if (vm.includeReports === 'true') {
                                 this.renderNodes(element.reports, vm.CONTAINER.REPORT, childrenBuffer, false);
