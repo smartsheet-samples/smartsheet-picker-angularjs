@@ -2,3 +2,4 @@
 todo.txt
 *.json
 .smartsheet-home.js
+/node_modules
