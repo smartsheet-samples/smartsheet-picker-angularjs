@@ -1,11 +1,10 @@
 # Smartsheet Picker AngularJS
-This project is a self-contained AngularJS directive that provides an expandable tree-view of a user's Smartsheet home. 
+A self-contained AngularJS directive that provides an expandable tree-view of a user's Smartsheet home. 
 
 ![Smartsheet Picker Folder Tree](https://user-images.githubusercontent.com/4098/32123928-eca5352e-bb1a-11e7-8df8-56e2f527a16f.png)
 
 The directive consumes the response from a [`GET /home`](https://smartsheet-platform.github.io/api-docs/#home) call from the [Smartsheet API](https://smartsheet-platform.github.io/api-docs/) and organizes it into a tree structure that is also searchable.
 
-![Smartsheet Picker Search Box](https://user-images.githubusercontent.com/4098/32123924-e8762c7e-bb1a-11e7-8093-8d92e3ae9d8b.png)
 
 ## Install
 To install drop the `smartsheetPicker` directory into your project and be sure to include the following files in your html:
@@ -15,9 +14,6 @@ smartsheetPicker/
 * dist/smartsheetPicker.directive.js
 * dist/smartsheetPicker.css
 
-**todo: probably want minified versions**
-
-**todo: npm package?**
 
 ## Usage
 The directive provides several options for customization. Here's an explanation of each of the available parameters:
@@ -29,4 +25,4 @@ The directive provides several options for customization. Here's an explanation 
 * **include-sights:** boolean value of whether sights will be included in the picker 
 
 ## Compatibility
-This was built and tested with AngularJS v. 1.6.1
+This was built and tested with AngularJS v. 1.6.5

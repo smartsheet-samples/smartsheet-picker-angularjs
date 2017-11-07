@@ -2,17 +2,17 @@
 <html>
 <head>
 	<title>AngularJS Smartsheet Picker</title>
-    <script src="../smartsheetPicker/dist/angular/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.6/angular.min.js"></script>
     <script src="../smartsheetPicker/dist/smartsheetPicker.module.js"></script>
     <script src="example.module.js"></script>
     <script src="../smartsheet-home.js"></script> <!-- stubbing a response for GET /home from Smartsheet -->
     <script src="../smartsheetPicker/dist/smartsheetPicker.directive.js"></script>
-    <link href="../smartsheetPicker/dist/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="../smartsheetPicker/dist/smartsheetPicker.css" rel="stylesheet"></script>
 </head>
 <body ng-app="example" ng-controller="homeController">
     <h2>Smartsheet Picker for AngularJS</h2>
-    <p>This is page is an example of how to impliment the Smartsheet Picker directive for AngularJS.</p>
+    <p>This is page is an example of how to implement the Smartsheet Picker directive for AngularJS.</p>
     <div class="smartsheetPicker" style="margin: 25px;">
         <smartsheet-picker
             on-sheet-select="vm.setSelectedSheet(selectedSheet)"
