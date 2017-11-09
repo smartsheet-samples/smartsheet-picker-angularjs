@@ -16,6 +16,15 @@ smartsheetPicker/
 
 
 ## Usage
+
+            <smartsheet-picker
+                on-sheet-select="vm.setSelectedSheet(selectedSheet)"
+                tree-data="vm.treeData"
+                selected-sheet= "vm.selectedSheet"
+                include-sheets="true"
+                include-reports="true"
+                include-sights="false"></sheet-picker>
+
 The directive provides several options for customization. Here's an explanation of each of the available parameters:
 * **on-sheet-select:** this is the callback function that will be called when an item in the picker is selected
 * **tree-data:** the json response from calling `GET /home` from the Smartsheet API
@@ -25,4 +34,5 @@ The directive provides several options for customization. Here's an explanation 
 * **include-sights:** boolean value of whether sights will be included in the picker 
 
 ## Compatibility
-This was built and tested with AngularJS v. 1.6.5
+This was built and tested with AngularJS v. 1.6.5 and Bootstrap 3.3.7
+
