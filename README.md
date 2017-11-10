@@ -1,5 +1,5 @@
 # Smartsheet Picker AngularJS
-A self-contained AngularJS directive that provides an expandable tree-view of a user's Smartsheet home. 
+An AngularJS directive that provides an expandable tree-view of a Smartsheet user's sheets, reports, workspaces and sights. 
 
 ![Smartsheet Picker Folder Tree](https://user-images.githubusercontent.com/4098/32123928-eca5352e-bb1a-11e7-8df8-56e2f527a16f.png)
 
