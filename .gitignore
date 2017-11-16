@@ -1,5 +1,5 @@
 .sass-cache
 todo.txt
-*.json
-.smartsheet-home.js
+smartsheet-home.json
+smartsheetHome.json
 /node_modules

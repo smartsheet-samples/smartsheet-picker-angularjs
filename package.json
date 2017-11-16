@@ -1,0 +1,24 @@
+{
+  "name": "smartsheet-picker-angularjs",
+  "version": "0.1.2",
+  "description": "An AngularJS directive that provides an expandable tree-view of a Smartsheet user's sheets, reports, workspaces and sights. ",
+  "main": "smartsheetPicker/dist/smartsheetPicker.module.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smartsheet-samples/smartsheet-picker-angularjs.git"
+  },
+  "keywords": [
+    "smartsheet",
+    "angularjs",
+    "directive"
+  ],
+  "author": "Smartsheet Developer Relations",
+  "license": "Apache 2",
+  "bugs": {
+    "url": "https://github.com/smartsheet-samples/smartsheet-picker-angularjs/issues"
+  },
+  "homepage": "https://github.com/smartsheet-samples/smartsheet-picker-angularjs#readme"
+}
