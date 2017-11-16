@@ -23,7 +23,7 @@ smartsheetPicker/
                 selected-sheet= "vm.selectedSheet"
                 include-sheets="true"
                 include-reports="true"
-                include-sights="false"></sheet-picker>
+                include-sights="false"></smartsheet-picker>
 
 The directive provides several options for customization. Here's an explanation of each of the available parameters:
 * **on-sheet-select:** this is the callback function that will be called when an item in the picker is selected
