@@ -13,15 +13,13 @@
 <body ng-app="example" ng-controller="homeController">
     <h2>Smartsheet Picker for AngularJS</h2>
     <p>This is page is an example of how to implement the Smartsheet Picker directive for AngularJS.</p>
-    <div class="smartsheetPicker" style="margin: 25px;">
-        <smartsheet-picker
-            on-sheet-select="vm.setSelectedSheet(selectedSheet)"
-            tree-data="vm.treeData"
-            selected-sheet= "vm.selectedSheet"
-            include-sheets="true"
-            include-reports="true"
-            include-sights="true"></smartsheet-picker>
-    </div>
+    <smartsheet-picker
+        on-sheet-select="vm.setSelectedSheet(selectedSheet)"
+        tree-data="vm.treeData"
+        selected-sheet= "vm.selectedSheet"
+        include-sheets="true"
+        include-reports="true"
+        include-sights="true"></smartsheet-picker>
     <script>
         angular
             .module('home',[])
