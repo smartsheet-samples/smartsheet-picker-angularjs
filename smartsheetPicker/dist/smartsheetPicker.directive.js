@@ -71,7 +71,9 @@
                     }.bind(this), this.searchTimeoutDelay);
                 }
             }.bind(this));
-
+            // This watch will trigger the formatTreeData function that will format the Home Response from Smartsheet into something more
+            // effecient for the directive to parse when filtering. 
+            // This watch should only be called once - when treeData is first loaded from the API.
             $scope.$watch('vm.treeData', function (newValue, oldValue) {
                 if (newValue !== undefined) {
                     this.formatTreeData();
@@ -150,6 +152,7 @@
                     }
                 }
             };
+            // Re-arranges some of the Home data to match the UI tree structure and to increase efficiency when filtering
             vm.formatTreeData = function () {
                 vm.formattedTree = {
                     "id": null,
@@ -180,6 +183,9 @@
                     vm.formattedTree.folders.push(sheetFolder);
                 }
                 // keeping objects in the order that is expected. workspaces would come after sheets
+                /*
+                 *  WORKSPACES
+                 */                
                 var workspaceFolder = {
                     "id":null,
                     "name": "Workspaces",
@@ -187,7 +193,9 @@
                     "workspaces": vm.treeData.workspaces 
                 };
                 vm.formattedTree.folders.push(workspaceFolder);
-
+                /*
+                 *  REPORTS
+                 */
                 if (vm.includeReports === 'true') {
                     var reportsFolder = {
                         "id": null,
@@ -197,6 +205,9 @@
                     };
                     vm.formattedTree.folders.push(reportsFolder);
                 }
+                /*
+                 *  SIGHTS
+                 */
                 if (vm.includeSights === 'true') {
                     this.sightsFolder = {
                         "id": null,
@@ -476,7 +487,6 @@
                                 }
                             }
                             buf.append('><span class="');
-                            // IDEA: check if object is array then check it's name
                             buf.append(element.type);
                             buf.append('">');
 
@@ -491,7 +501,10 @@
                             
                             function elementIsContainer(treeElement) {
                                 // FIXME: USE vm.CONTAINER constant
-                                return (element.type === 'FOLDER' || element.type === 'WORKSPACE' || element.type === 'REPORTS') && ((element.sheets != null && element.sheets.length > 0) || (element.reports != null && element.reports.length > 0));
+                                return (element.type === vm.CONTAINER.FOLDER || 
+                                    element.type === vm.CONTAINER.WORKSPACE || 
+                                    element.type === vm.CONTAINER.REPORTS) && 
+                                    ((element.sheets != null && element.sheets.length > 0) || (element.reports != null && element.reports.length > 0));
                                     
                             }
 
